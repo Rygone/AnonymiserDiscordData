@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30621.155
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnonymiserDiscordData", "AnonymiserDiscordData\AnonymiserDiscordData.csproj", "{B933108D-5486-4D02-B81D-08943E280B96}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnonymiserDiscordData.Test", "AnonymiserDiscordData.Test\AnonymiserDiscordData.Test.csproj", "{9F460E08-AAC9-4846-873D-80F3BC96564F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B933108D-5486-4D02-B81D-08943E280B96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B933108D-5486-4D02-B81D-08943E280B96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B933108D-5486-4D02-B81D-08943E280B96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B933108D-5486-4D02-B81D-08943E280B96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F460E08-AAC9-4846-873D-80F3BC96564F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F460E08-AAC9-4846-873D-80F3BC96564F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F460E08-AAC9-4846-873D-80F3BC96564F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F460E08-AAC9-4846-873D-80F3BC96564F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BABDDC99-7D3A-4133-B0B0-B5188E3F1A00}
+	EndGlobalSection
+EndGlobal
