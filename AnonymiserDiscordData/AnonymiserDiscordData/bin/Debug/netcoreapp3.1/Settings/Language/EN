@@ -1,0 +1,17 @@
+next.Text>Next
+info1.Text>Hello,
+info2.Text>I decided to make a little program to anonymize the Discord data.
+info3.Text>I published it with the source code here:
+info4.Text>https://github.com/Rygone/AnonymiserDiscordData
+info5.Text>If you have any questions MP me on Discord. (NEYGO # 5944)
+UrlError> Unable to launch web browser,\r\nURL copier to clipboard
+lblPath.Text>Discord file location
+path.Text>
+found.Text>...
+settings1.Text>Deleted messages (recommended)
+settings2.Text>Hide nicknames (recommended)
+settings3.Text>Hide server names
+settings4.Text>Hide applications
+settings5.Text>Hide operating system information
+settings6.Text>Hide locations
+settings7.Text>Hide IPs (recommandé)
