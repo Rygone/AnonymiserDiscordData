@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "Hj8T84Bdas2cODsSFdMM59q+xpfvU8NI9nZXjYjAhHTDGBtdS6x4h8FkZpHjbPSTiqQ0inLBStUo78YlLCSlgg==",
+  "dgSpecHash": "96R3LAjLYZWF0w37gGB9awEah/q3kdnPaou89xCk0BJn/FZGnMNNGwI4sZRYSNIT6rzV5ZNCDN/CnzGFnCvKVQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\PC\\source\\repos\\AnonymiserDiscordData\\AnonymiserDiscordData\\AnonymiserDiscordData\\AnonymiserDiscordData.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\PC\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
+  ],
   "logs": []
 }

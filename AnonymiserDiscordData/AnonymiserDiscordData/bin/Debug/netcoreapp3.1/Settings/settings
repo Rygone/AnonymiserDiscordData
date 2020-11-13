@@ -1,8 +1,15 @@
 Current Language>FR
-settings1.Checked>true
-settings2.Checked>true
-settings3.Checked>false
-settings4.Checked>false
-settings5.Checked>false
-settings6.Checked>false
-settings7.Checked>true
+
+HideMessages.Checked>true
+DeleteMessages.Checked>false
+HideNicknames.Checked>true
+HideServerIDs.Checked>true
+HideServerNames.Checked>false
+HideChannelIDs.Checked>true
+HideChannelNames.Checked>true
+HideApplication.Checked>true
+DeleteApplication.Checked>false
+HideOS.Checked>false
+HideIPs.Checked>true
+HideLocations.Checked>false
+DeleteActivities.Checked>false

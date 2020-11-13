@@ -1,17 +1,35 @@
+formSettings.Text>Discord data anonymizer
 next.Text>Next
+
 info1.Text>Hello,
 info2.Text>I decided to make a little program to anonymize the Discord data.
 info3.Text>I published it with the source code here:
 info4.Text>https://github.com/Rygone/AnonymiserDiscordData
 info5.Text>If you have any questions MP me on Discord. (NEYGO # 5944)
+
 UrlError> Unable to launch web browser,\r\nURL copier to clipboard
 lblPath.Text>Discord file location
-path.Text>
 found.Text>...
-settings1.Text>Deleted messages (recommended)
-settings2.Text>Hide nicknames (recommended)
-settings3.Text>Hide server names
-settings4.Text>Hide applications
-settings5.Text>Hide operating system information
-settings6.Text>Hide locations
-settings7.Text>Hide IPs (recommandé)
+
+HideMessages.Text>Hide messages (recommended)
+DeleteMessages.Text>Delete all message data
+HideNicknames.Text>Hide nicknames (recommended)
+HideServerIDs.Text>Hide server IDs (recommended)
+HideServerNames.Text>Hide server names
+HideChannelIDs.Text>Hide channel IDs (recommended)
+HideChannelNames.Text>Hide channel names (recommended)
+HideApplication.Text>Hide application data (recommended)
+DeleteApplication.Text>Delete application data
+HideOS.Text>Hide operating system information
+HideIPs.Text>Hide IPs (recommended)
+HideLocations.Text>Hide locations
+DeleteActivities.Text>Delete all activities
+
+SureToChange>Are you sure you want to disable this recommended option?
+PersonalData>Risk of revealing personal data
+lblLoading.Text>Progression
+
+
+
+605.0000
+1025.0000

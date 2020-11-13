@@ -1,17 +1,36 @@
+formSettings.Text>Anonymiseur de données Discord
 next.Text>Suivent
+
 info1.Text>Hello,
 info2.Text>J’ai décidé de faire un petit programme pour anonymisée le donnée Discord.
 info3.Text>Je le l’ai publié avec le code source ici :
 info4.Text>https://github.com/Rygone/AnonymiserDiscordData
 info5.Text>Si vous avez des questions MP moi sur Discord. (NEYGO#5944)
+
 UrlError>Impossible de lancer navigateur internet,\r\nURL copier dans le presse papier
 lblPath.Text>Emplacement du fichier de Discord
-path.Text>
 found.Text>...
-settings1.Text>Supprimé les message (recommandé)
-settings2.Text>Masquer les pseudos (recommandé)
-settings3.Text>Masquer les nom de serveurs
-settings4.Text>Masquer les application
-settings5.Text>Masquer les informations sur le système d'exploitation
-settings6.Text>Masquer les localisation
-settings7.Text>Masquer les IPs (recommandé)
+
+HideMessages.Text>Masquer les message (recommandé)
+DeleteMessages.Text>Supprimer toutes les données des message
+HideNicknames.Text>Masquer les pseudos (recommandé)
+HideServerIDs.Text>Masquer les IDs des serveurs  (recommandé)
+HideServerNames.Text>Masquer les noms des serveurs
+HideChannelIDs.Text>Masquer les IDs des channels (recommandé)
+HideChannelNames.Text>Masquer les noms des channels (recommandé)
+HideApplication.Text>Masquer les données application (recommandé)
+DeleteApplication.Text>Supprimer les données application
+HideOS.Text>Masquer les informations sur le système d'exploitation
+HideIPs.Text>Masquer les IPs (recommandé)
+HideLocations.Text>Masquer les localisations
+DeleteActivities.Text>Supprimer toutes les activités
+
+SureToChange>Êtes vous sur de vouloir désactiver cette option recommandé?
+PersonalData>Risque de dévoiler des données personne
+lblLoading.Text>Progression
+UnZip>!!!UnZip don't exist!!!
+Messages>!!!Messages don't exist!!!
+user.json>!!!user.json don't exist!!!
+NickName>!!!NickName don't exist!!!
+Activity>!!!Activity don't exist!!!
+Zip>!!!Zip don't exist!!!

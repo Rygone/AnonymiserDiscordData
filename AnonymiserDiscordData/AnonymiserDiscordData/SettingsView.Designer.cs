@@ -1,6 +1,6 @@
 ﻿namespace AnonymiserDiscordData
 {
-    partial class formSettings
+    partial class FormSettings
     {
         /// <summary>
         ///  Required designer variable.
@@ -36,19 +36,29 @@
             this.info2 = new System.Windows.Forms.Label();
             this.info1 = new System.Windows.Forms.Label();
             this.settings = new System.Windows.Forms.Panel();
-            this.settings7 = new System.Windows.Forms.CheckBox();
-            this.settings6 = new System.Windows.Forms.CheckBox();
-            this.settings5 = new System.Windows.Forms.CheckBox();
-            this.settings4 = new System.Windows.Forms.CheckBox();
-            this.settings3 = new System.Windows.Forms.CheckBox();
-            this.settings2 = new System.Windows.Forms.CheckBox();
-            this.settings1 = new System.Windows.Forms.CheckBox();
+            this.HideIPs = new System.Windows.Forms.CheckBox();
+            this.HideLocations = new System.Windows.Forms.CheckBox();
+            this.DeleteActivities = new System.Windows.Forms.CheckBox();
+            this.HideOS = new System.Windows.Forms.CheckBox();
+            this.DeleteApplication = new System.Windows.Forms.CheckBox();
+            this.HideApplication = new System.Windows.Forms.CheckBox();
+            this.HideChannelNames = new System.Windows.Forms.CheckBox();
+            this.HideChannelIDs = new System.Windows.Forms.CheckBox();
+            this.HideServerNames = new System.Windows.Forms.CheckBox();
+            this.HideServerIDs = new System.Windows.Forms.CheckBox();
+            this.HideNicknames = new System.Windows.Forms.CheckBox();
+            this.DeleteMessages = new System.Windows.Forms.CheckBox();
+            this.HideMessages = new System.Windows.Forms.CheckBox();
             this.found = new System.Windows.Forms.Button();
             this.lblPath = new System.Windows.Forms.Label();
             this.path = new System.Windows.Forms.TextBox();
             this.language = new System.Windows.Forms.ComboBox();
+            this.lblLoading = new System.Windows.Forms.Label();
+            this.loading = new System.Windows.Forms.Panel();
+            this.pbLoading = new System.Windows.Forms.ProgressBar();
             this.info.SuspendLayout();
             this.settings.SuspendLayout();
+            this.loading.SuspendLayout();
             this.SuspendLayout();
             // 
             // next
@@ -58,11 +68,11 @@
             this.next.Location = new System.Drawing.Point(1021, 518);
             this.next.Margin = new System.Windows.Forms.Padding(4);
             this.next.Name = "next";
-            this.next.Size = new System.Drawing.Size(150, 30);
+            this.next.Size = new System.Drawing.Size(150, 34);
             this.next.TabIndex = 0;
             this.next.Text = "next";
             this.next.UseVisualStyleBackColor = false;
-            this.next.Click += new System.EventHandler(this.next_Click);
+            this.next.Click += new System.EventHandler(this.Next_Click);
             // 
             // info
             // 
@@ -75,10 +85,10 @@
             this.info.Controls.Add(this.info3);
             this.info.Controls.Add(this.info2);
             this.info.Controls.Add(this.info1);
-            this.info.Location = new System.Drawing.Point(1177, 12);
+            this.info.Location = new System.Drawing.Point(12, 13);
             this.info.Name = "info";
-            this.info.Size = new System.Drawing.Size(1159, 499);
-            this.info.TabIndex = 1;
+            this.info.Size = new System.Drawing.Size(149, 268);
+            this.info.TabIndex = 2;
             this.info.Visible = false;
             // 
             // info4
@@ -87,10 +97,10 @@
             this.info4.Location = new System.Drawing.Point(90, 160);
             this.info4.Name = "info4";
             this.info4.Size = new System.Drawing.Size(46, 21);
-            this.info4.TabIndex = 1;
+            this.info4.TabIndex = 6;
             this.info4.TabStop = true;
             this.info4.Text = "info4";
-            this.info4.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.info4_LinkClicked);
+            this.info4.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.Info4_LinkClicked);
             // 
             // info5
             // 
@@ -98,7 +108,7 @@
             this.info5.Location = new System.Drawing.Point(40, 200);
             this.info5.Name = "info5";
             this.info5.Size = new System.Drawing.Size(46, 21);
-            this.info5.TabIndex = 0;
+            this.info5.TabIndex = 7;
             this.info5.Text = "info5";
             // 
             // info3
@@ -107,7 +117,7 @@
             this.info3.Location = new System.Drawing.Point(40, 120);
             this.info3.Name = "info3";
             this.info3.Size = new System.Drawing.Size(46, 21);
-            this.info3.TabIndex = 0;
+            this.info3.TabIndex = 5;
             this.info3.Text = "info3";
             // 
             // info2
@@ -116,7 +126,7 @@
             this.info2.Location = new System.Drawing.Point(40, 80);
             this.info2.Name = "info2";
             this.info2.Size = new System.Drawing.Size(46, 21);
-            this.info2.TabIndex = 0;
+            this.info2.TabIndex = 4;
             this.info2.Text = "info2";
             // 
             // info1
@@ -125,7 +135,7 @@
             this.info1.Location = new System.Drawing.Point(40, 40);
             this.info1.Name = "info1";
             this.info1.Size = new System.Drawing.Size(46, 21);
-            this.info1.TabIndex = 0;
+            this.info1.TabIndex = 3;
             this.info1.Text = "info1";
             // 
             // settings
@@ -134,102 +144,169 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.settings.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.settings.Controls.Add(this.settings7);
-            this.settings.Controls.Add(this.settings6);
-            this.settings.Controls.Add(this.settings5);
-            this.settings.Controls.Add(this.settings4);
-            this.settings.Controls.Add(this.settings3);
-            this.settings.Controls.Add(this.settings2);
-            this.settings.Controls.Add(this.settings1);
+            this.settings.Controls.Add(this.HideIPs);
+            this.settings.Controls.Add(this.HideLocations);
+            this.settings.Controls.Add(this.DeleteActivities);
+            this.settings.Controls.Add(this.HideOS);
+            this.settings.Controls.Add(this.DeleteApplication);
+            this.settings.Controls.Add(this.HideApplication);
+            this.settings.Controls.Add(this.HideChannelNames);
+            this.settings.Controls.Add(this.HideChannelIDs);
+            this.settings.Controls.Add(this.HideServerNames);
+            this.settings.Controls.Add(this.HideServerIDs);
+            this.settings.Controls.Add(this.HideNicknames);
+            this.settings.Controls.Add(this.DeleteMessages);
+            this.settings.Controls.Add(this.HideMessages);
             this.settings.Controls.Add(this.found);
             this.settings.Controls.Add(this.lblPath);
             this.settings.Controls.Add(this.path);
-            this.settings.Location = new System.Drawing.Point(12, 12);
+            this.settings.Location = new System.Drawing.Point(167, 12);
             this.settings.Name = "settings";
-            this.settings.Size = new System.Drawing.Size(1159, 499);
-            this.settings.TabIndex = 1;
+            this.settings.Size = new System.Drawing.Size(661, 378);
+            this.settings.TabIndex = 8;
             // 
-            // settings7
+            // HideIPs
             // 
-            this.settings7.AutoSize = true;
-            this.settings7.Location = new System.Drawing.Point(40, 350);
-            this.settings7.Name = "settings7";
-            this.settings7.Size = new System.Drawing.Size(92, 25);
-            this.settings7.TabIndex = 4;
-            this.settings7.Text = "settings7";
-            this.settings7.UseVisualStyleBackColor = true;
+            this.HideIPs.AutoSize = true;
+            this.HideIPs.Location = new System.Drawing.Point(550, 230);
+            this.HideIPs.Name = "HideIPs";
+            this.HideIPs.Size = new System.Drawing.Size(101, 25);
+            this.HideIPs.TabIndex = 22;
+            this.HideIPs.Text = "settings11";
+            this.HideIPs.UseVisualStyleBackColor = true;
             // 
-            // settings6
+            // HideLocations
             // 
-            this.settings6.AutoSize = true;
-            this.settings6.Location = new System.Drawing.Point(40, 310);
-            this.settings6.Name = "settings6";
-            this.settings6.Size = new System.Drawing.Size(92, 25);
-            this.settings6.TabIndex = 4;
-            this.settings6.Text = "settings6";
-            this.settings6.UseVisualStyleBackColor = true;
+            this.HideLocations.AutoSize = true;
+            this.HideLocations.Location = new System.Drawing.Point(550, 270);
+            this.HideLocations.Name = "HideLocations";
+            this.HideLocations.Size = new System.Drawing.Size(101, 25);
+            this.HideLocations.TabIndex = 23;
+            this.HideLocations.Text = "settings12";
+            this.HideLocations.UseVisualStyleBackColor = true;
             // 
-            // settings5
+            // DeleteActivities
             // 
-            this.settings5.AutoSize = true;
-            this.settings5.Location = new System.Drawing.Point(40, 270);
-            this.settings5.Name = "settings5";
-            this.settings5.Size = new System.Drawing.Size(92, 25);
-            this.settings5.TabIndex = 4;
-            this.settings5.Text = "settings5";
-            this.settings5.UseVisualStyleBackColor = true;
+            this.DeleteActivities.AutoSize = true;
+            this.DeleteActivities.Location = new System.Drawing.Point(550, 310);
+            this.DeleteActivities.Name = "DeleteActivities";
+            this.DeleteActivities.Size = new System.Drawing.Size(101, 25);
+            this.DeleteActivities.TabIndex = 24;
+            this.DeleteActivities.Text = "settings13";
+            this.DeleteActivities.UseVisualStyleBackColor = true;
             // 
-            // settings4
+            // HideOS
             // 
-            this.settings4.AutoSize = true;
-            this.settings4.Location = new System.Drawing.Point(40, 230);
-            this.settings4.Name = "settings4";
-            this.settings4.Size = new System.Drawing.Size(92, 25);
-            this.settings4.TabIndex = 4;
-            this.settings4.Text = "settings4";
-            this.settings4.UseVisualStyleBackColor = true;
+            this.HideOS.AutoSize = true;
+            this.HideOS.Location = new System.Drawing.Point(550, 190);
+            this.HideOS.Name = "HideOS";
+            this.HideOS.Size = new System.Drawing.Size(101, 25);
+            this.HideOS.TabIndex = 21;
+            this.HideOS.Text = "settings10";
+            this.HideOS.UseVisualStyleBackColor = true;
             // 
-            // settings3
+            // DeleteApplication
             // 
-            this.settings3.AutoSize = true;
-            this.settings3.Location = new System.Drawing.Point(40, 190);
-            this.settings3.Name = "settings3";
-            this.settings3.Size = new System.Drawing.Size(92, 25);
-            this.settings3.TabIndex = 4;
-            this.settings3.Text = "settings3";
-            this.settings3.UseVisualStyleBackColor = true;
+            this.DeleteApplication.AutoSize = true;
+            this.DeleteApplication.Location = new System.Drawing.Point(550, 150);
+            this.DeleteApplication.Name = "DeleteApplication";
+            this.DeleteApplication.Size = new System.Drawing.Size(92, 25);
+            this.DeleteApplication.TabIndex = 20;
+            this.DeleteApplication.Text = "settings9";
+            this.DeleteApplication.UseVisualStyleBackColor = true;
             // 
-            // settings2
+            // HideApplication
             // 
-            this.settings2.AutoSize = true;
-            this.settings2.Location = new System.Drawing.Point(40, 150);
-            this.settings2.Name = "settings2";
-            this.settings2.Size = new System.Drawing.Size(92, 25);
-            this.settings2.TabIndex = 4;
-            this.settings2.Text = "settings2";
-            this.settings2.UseVisualStyleBackColor = true;
+            this.HideApplication.AutoSize = true;
+            this.HideApplication.Location = new System.Drawing.Point(550, 110);
+            this.HideApplication.Name = "HideApplication";
+            this.HideApplication.Size = new System.Drawing.Size(92, 25);
+            this.HideApplication.TabIndex = 19;
+            this.HideApplication.Text = "settings8";
+            this.HideApplication.UseVisualStyleBackColor = true;
             // 
-            // settings1
+            // HideChannelNames
             // 
-            this.settings1.AutoSize = true;
-            this.settings1.Location = new System.Drawing.Point(40, 110);
-            this.settings1.Name = "settings1";
-            this.settings1.Size = new System.Drawing.Size(92, 25);
-            this.settings1.TabIndex = 4;
-            this.settings1.Text = "settings1";
-            this.settings1.UseVisualStyleBackColor = true;
+            this.HideChannelNames.AutoSize = true;
+            this.HideChannelNames.Location = new System.Drawing.Point(40, 350);
+            this.HideChannelNames.Name = "HideChannelNames";
+            this.HideChannelNames.Size = new System.Drawing.Size(92, 25);
+            this.HideChannelNames.TabIndex = 18;
+            this.HideChannelNames.Text = "settings7";
+            this.HideChannelNames.UseVisualStyleBackColor = true;
+            // 
+            // HideChannelIDs
+            // 
+            this.HideChannelIDs.AutoSize = true;
+            this.HideChannelIDs.Location = new System.Drawing.Point(40, 310);
+            this.HideChannelIDs.Name = "HideChannelIDs";
+            this.HideChannelIDs.Size = new System.Drawing.Size(92, 25);
+            this.HideChannelIDs.TabIndex = 17;
+            this.HideChannelIDs.Text = "settings6";
+            this.HideChannelIDs.UseVisualStyleBackColor = true;
+            // 
+            // HideServerNames
+            // 
+            this.HideServerNames.AutoSize = true;
+            this.HideServerNames.Location = new System.Drawing.Point(40, 270);
+            this.HideServerNames.Name = "HideServerNames";
+            this.HideServerNames.Size = new System.Drawing.Size(92, 25);
+            this.HideServerNames.TabIndex = 16;
+            this.HideServerNames.Text = "settings5";
+            this.HideServerNames.UseVisualStyleBackColor = true;
+            // 
+            // HideServerIDs
+            // 
+            this.HideServerIDs.AutoSize = true;
+            this.HideServerIDs.Location = new System.Drawing.Point(40, 230);
+            this.HideServerIDs.Name = "HideServerIDs";
+            this.HideServerIDs.Size = new System.Drawing.Size(92, 25);
+            this.HideServerIDs.TabIndex = 15;
+            this.HideServerIDs.Text = "settings4";
+            this.HideServerIDs.UseVisualStyleBackColor = true;
+            // 
+            // HideNicknames
+            // 
+            this.HideNicknames.AutoSize = true;
+            this.HideNicknames.Location = new System.Drawing.Point(40, 190);
+            this.HideNicknames.Name = "HideNicknames";
+            this.HideNicknames.Size = new System.Drawing.Size(92, 25);
+            this.HideNicknames.TabIndex = 14;
+            this.HideNicknames.Text = "settings3";
+            this.HideNicknames.UseVisualStyleBackColor = true;
+            // 
+            // DeleteMessages
+            // 
+            this.DeleteMessages.AutoSize = true;
+            this.DeleteMessages.Location = new System.Drawing.Point(40, 150);
+            this.DeleteMessages.Name = "DeleteMessages";
+            this.DeleteMessages.Size = new System.Drawing.Size(92, 25);
+            this.DeleteMessages.TabIndex = 13;
+            this.DeleteMessages.Text = "settings2";
+            this.DeleteMessages.UseVisualStyleBackColor = true;
+            // 
+            // HideMessages
+            // 
+            this.HideMessages.AutoSize = true;
+            this.HideMessages.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.HideMessages.Location = new System.Drawing.Point(40, 110);
+            this.HideMessages.Name = "HideMessages";
+            this.HideMessages.Size = new System.Drawing.Size(92, 25);
+            this.HideMessages.TabIndex = 12;
+            this.HideMessages.Text = "settings1";
+            this.HideMessages.UseVisualStyleBackColor = true;
             // 
             // found
             // 
             this.found.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.found.Location = new System.Drawing.Point(443, 63);
+            this.found.Location = new System.Drawing.Point(443, 65);
             this.found.Margin = new System.Windows.Forms.Padding(4);
             this.found.Name = "found";
             this.found.Size = new System.Drawing.Size(40, 34);
-            this.found.TabIndex = 0;
+            this.found.TabIndex = 11;
             this.found.Text = "...";
             this.found.UseVisualStyleBackColor = false;
-            this.found.Click += new System.EventHandler(this.found_Click);
+            this.found.Click += new System.EventHandler(this.Found_Click);
             // 
             // lblPath
             // 
@@ -237,26 +314,58 @@
             this.lblPath.Location = new System.Drawing.Point(40, 40);
             this.lblPath.Name = "lblPath";
             this.lblPath.Size = new System.Drawing.Size(57, 21);
-            this.lblPath.TabIndex = 3;
+            this.lblPath.TabIndex = 9;
             this.lblPath.Text = "lblPath";
             // 
             // path
             // 
             this.path.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.path.Location = new System.Drawing.Point(40, 65);
+            this.path.Location = new System.Drawing.Point(40, 70);
             this.path.Name = "path";
             this.path.Size = new System.Drawing.Size(396, 29);
-            this.path.TabIndex = 0;
+            this.path.TabIndex = 10;
             // 
             // language
             // 
             this.language.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.language.BackColor = System.Drawing.SystemColors.ControlDark;
             this.language.FormattingEnabled = true;
-            this.language.Location = new System.Drawing.Point(864, 517);
+            this.language.Location = new System.Drawing.Point(864, 521);
             this.language.Name = "language";
             this.language.Size = new System.Drawing.Size(150, 29);
-            this.language.TabIndex = 2;
+            this.language.TabIndex = 1;
+            // 
+            // lblLoading
+            // 
+            this.lblLoading.AutoSize = true;
+            this.lblLoading.Location = new System.Drawing.Point(40, 40);
+            this.lblLoading.Name = "lblLoading";
+            this.lblLoading.Size = new System.Drawing.Size(83, 21);
+            this.lblLoading.TabIndex = 26;
+            this.lblLoading.Text = "lblLoading";
+            // 
+            // loading
+            // 
+            this.loading.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.loading.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.loading.Controls.Add(this.pbLoading);
+            this.loading.Controls.Add(this.lblLoading);
+            this.loading.Location = new System.Drawing.Point(12, 287);
+            this.loading.Name = "loading";
+            this.loading.Size = new System.Drawing.Size(149, 103);
+            this.loading.TabIndex = 25;
+            this.loading.Visible = false;
+            // 
+            // pbLoading
+            // 
+            this.pbLoading.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbLoading.Location = new System.Drawing.Point(40, 70);
+            this.pbLoading.Name = "pbLoading";
+            this.pbLoading.Size = new System.Drawing.Size(69, 23);
+            this.pbLoading.TabIndex = 27;
             // 
             // formSettings
             // 
@@ -264,6 +373,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ClientSize = new System.Drawing.Size(1184, 561);
+            this.Controls.Add(this.loading);
             this.Controls.Add(this.info);
             this.Controls.Add(this.language);
             this.Controls.Add(this.settings);
@@ -271,11 +381,13 @@
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "formSettings";
-            this.Load += new System.EventHandler(this.formSettings_Load);
+            this.Load += new System.EventHandler(this.FormSettings_Load);
             this.info.ResumeLayout(false);
             this.info.PerformLayout();
             this.settings.ResumeLayout(false);
             this.settings.PerformLayout();
+            this.loading.ResumeLayout(false);
+            this.loading.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -294,13 +406,22 @@
         private System.Windows.Forms.Label lblPath;
         private System.Windows.Forms.TextBox path;
         private System.Windows.Forms.Button found;
-        private System.Windows.Forms.CheckBox settings5;
-        private System.Windows.Forms.CheckBox settings4;
-        private System.Windows.Forms.CheckBox settings3;
-        private System.Windows.Forms.CheckBox settings2;
-        private System.Windows.Forms.CheckBox settings1;
-        private System.Windows.Forms.CheckBox settings7;
-        private System.Windows.Forms.CheckBox settings6;
+        private System.Windows.Forms.CheckBox HideServerNames;
+        private System.Windows.Forms.CheckBox HideServerIDs;
+        private System.Windows.Forms.CheckBox HideNicknames;
+        private System.Windows.Forms.CheckBox DeleteMessages;
+        private System.Windows.Forms.CheckBox HideMessages;
+        private System.Windows.Forms.CheckBox HideChannelNames;
+        private System.Windows.Forms.CheckBox HideChannelIDs;
+        private System.Windows.Forms.CheckBox DeleteApplication;
+        private System.Windows.Forms.CheckBox HideApplication;
+        private System.Windows.Forms.CheckBox HideOS;
+        private System.Windows.Forms.CheckBox HideIPs;
+        private System.Windows.Forms.CheckBox HideLocations;
+        private System.Windows.Forms.CheckBox DeleteActivities;
+        private System.Windows.Forms.Label lblLoading;
+        private System.Windows.Forms.Panel loading;
+        private System.Windows.Forms.ProgressBar pbLoading;
     }
 }
 

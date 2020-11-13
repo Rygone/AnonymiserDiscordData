@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AnonymiserDiscordData.Properties {
+namespace Rygone.Properties {
     using System;
     
     

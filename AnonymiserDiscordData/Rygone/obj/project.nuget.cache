@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "0ax7h9148Zu4ncs6rUEI0QqscyU55/crxrEgo5lRCJG004PerJ6SlQShIX5ENKDMHne7h8I3D5U0lhq/nlLUcA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\PC\\source\\repos\\AnonymiserDiscordData\\AnonymiserDiscordData\\Rygone\\Rygone.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\PC\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

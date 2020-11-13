@@ -14,7 +14,7 @@ namespace AnonymiserDiscordData
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new formSettings());
+            Application.Run(new FormSettings());
         }
     }
 }
