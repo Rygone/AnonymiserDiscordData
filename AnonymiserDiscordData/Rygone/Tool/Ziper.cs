@@ -20,7 +20,12 @@ namespace Rygone.Tool
                     }
                     string temp;
                     Random rdm = new Random();
-                    while (Directory.Exists(tempPath + (temp = rdm.Next().ToString()))) { }
+                    int i = 0;
+                    while (Directory.Exists(tempPath + (temp = rdm.Next().ToString())))
+                    {
+                        if (i++ > 25)
+                            throw new DirectoryNotFoundException("TempPath dosn't exists");
+                    }
                     tempPath += temp;
                     Directory.CreateDirectory(tempPath);
                 }
@@ -30,26 +35,25 @@ namespace Rygone.Tool
         public static bool UnZip(string from, string to = null)
         {
             if(from == null)
-            {
                 return false;
-            }
             if(to == null)
-            {
-                to = TempPath;
-            }
+                try
+                {
+                    if (Directory.Exists(TempPath))
+                        tempPath = null;
+                    to = TempPath;
+                }
+                catch { return false; }
             ZipFile.ExtractToDirectory(from, to);
             return true;
         }
         public static bool Zip(string to, string from = null)
         {
-            if (to == null)
-            {
+            if (to == null || File.Exists(to))
                 return false;
-            }
             if (from == null)
-            {
-                from = TempPath;
-            }
+                try { from = TempPath; }
+                catch { return false; }
             ZipFile.CreateFromDirectory(from, to);
             return true;
         }

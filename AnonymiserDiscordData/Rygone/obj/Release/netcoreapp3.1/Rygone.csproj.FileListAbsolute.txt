@@ -1,0 +1,15 @@
+C:\Users\PC\source\repos\AnonymiserDiscordData\AnonymiserDiscordData\Rygone\bin\Release\netcoreapp3.1\Rygone.exe
+C:\Users\PC\source\repos\AnonymiserDiscordData\AnonymiserDiscordData\Rygone\bin\Release\netcoreapp3.1\Rygone.deps.json
+C:\Users\PC\source\repos\AnonymiserDiscordData\AnonymiserDiscordData\Rygone\bin\Release\netcoreapp3.1\Rygone.runtimeconfig.json
+C:\Users\PC\source\repos\AnonymiserDiscordData\AnonymiserDiscordData\Rygone\bin\Release\netcoreapp3.1\Rygone.runtimeconfig.dev.json
+C:\Users\PC\source\repos\AnonymiserDiscordData\AnonymiserDiscordData\Rygone\bin\Release\netcoreapp3.1\Rygone.dll
+C:\Users\PC\source\repos\AnonymiserDiscordData\AnonymiserDiscordData\Rygone\bin\Release\netcoreapp3.1\Rygone.pdb
+C:\Users\PC\source\repos\AnonymiserDiscordData\AnonymiserDiscordData\Rygone\bin\Release\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\PC\source\repos\AnonymiserDiscordData\AnonymiserDiscordData\Rygone\obj\Release\netcoreapp3.1\Rygone.csprojAssemblyReference.cache
+C:\Users\PC\source\repos\AnonymiserDiscordData\AnonymiserDiscordData\Rygone\obj\Release\netcoreapp3.1\Rygone.AssemblyInfoInputs.cache
+C:\Users\PC\source\repos\AnonymiserDiscordData\AnonymiserDiscordData\Rygone\obj\Release\netcoreapp3.1\Rygone.AssemblyInfo.cs
+C:\Users\PC\source\repos\AnonymiserDiscordData\AnonymiserDiscordData\Rygone\obj\Release\netcoreapp3.1\Rygone.csproj.CoreCompileInputs.cache
+C:\Users\PC\source\repos\AnonymiserDiscordData\AnonymiserDiscordData\Rygone\obj\Release\netcoreapp3.1\Rygone.csproj.CopyComplete
+C:\Users\PC\source\repos\AnonymiserDiscordData\AnonymiserDiscordData\Rygone\obj\Release\netcoreapp3.1\Rygone.dll
+C:\Users\PC\source\repos\AnonymiserDiscordData\AnonymiserDiscordData\Rygone\obj\Release\netcoreapp3.1\Rygone.pdb
+C:\Users\PC\source\repos\AnonymiserDiscordData\AnonymiserDiscordData\Rygone\obj\Release\netcoreapp3.1\Rygone.genruntimeconfig.cache

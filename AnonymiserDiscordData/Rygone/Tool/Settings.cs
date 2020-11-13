@@ -316,8 +316,8 @@ namespace Rygone.Tool
         {
             string text = Get(name, LanguageExtensions.File(CurrentLanguage));
             if (text == null)
-                Set(name, $"!!!{name} don't exist!!!", LanguageExtensions.File(CurrentLanguage));
-            return text ?? $"!!!{name} don't exist!!!";
+                Set(name, $"!!!{name}!!!", LanguageExtensions.File(CurrentLanguage));
+            return text ?? $"!!!{name}-!!!";
         }
         public static string GetDefaultText(Control control)
             => GetDefaultText(Text(control));

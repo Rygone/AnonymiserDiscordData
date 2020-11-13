@@ -10,7 +10,7 @@ namespace AnonymiserDiscordData.Tool
 {
     public static class Data
     {
-        public delegate void ActionError(string error);
+        public delegate void Action(string value);
         public delegate void SetMax(int max);
         public delegate void SetValue(int value);
         public delegate void SetLabel(string value);
@@ -25,15 +25,25 @@ namespace AnonymiserDiscordData.Tool
         {
             if (!IDs.ContainsKey(key))
             {
-                if (HideIDs)
+                try
                 {
-                    if (HideNames || !JIDs.ContainsKey(key))
-                        return IDs[key] = basse + IDs.Count;
+                    if (HideIDs)
+                    {
+                        if (HideNames || JIDs == null || !JIDs.ContainsKey(key))
+                            return IDs[key] = basse + IDs.Count;
+                        else
+                            return IDs[key] = (string)JIDs[key];
+                    }
                     else
-                        return IDs[key] = (string)JIDs[key];
+                        return IDs[key] = key;
                 }
-                else
-                    return IDs[key] = key;
+                catch(Exception e)
+                {
+                    if (IDs.ContainsKey(key))
+                        return IDs[key];
+                    else
+                        throw e;
+                }
             }
             return IDs[key];
         }
@@ -51,7 +61,7 @@ namespace AnonymiserDiscordData.Tool
             SetValue Value,
             SetLabel Label,
             Action End,
-            ActionError Error,
+            Action Error,
             bool HideMessages,
             bool DeleteMessages,
             bool HideNicknames,
@@ -69,7 +79,7 @@ namespace AnonymiserDiscordData.Tool
         {
             Task t = new Task(() =>
             {
-                form.Invoke(Max, 102);
+                form.Invoke(Max, 114);
                 form.Invoke(Value, 0);
                 int start = 0;
                 int max = 0;
@@ -79,68 +89,83 @@ namespace AnonymiserDiscordData.Tool
                 form.Invoke(Label, "UnZip");
                 if (!Ziper.UnZip(Path))
                 {
-                    Error("UnZipFailed");
+                    form.Invoke(Error, "UnZipFailed");
                     return;
                 }
                 form.Invoke(Value, start += max);
                 #endregion
 
-
                 #region IDs
-                max = 5;
+                max = 2;
                 form.Invoke(Label, "IDs");
+                try
                 {
                     ServerIDs = new Dictionary<string, string>();
                     ChannelIDs = new Dictionary<string, string>();
                     string channel = $@"{Ziper.TempPath}\messages\index.json";
                     string servers = $@"{Ziper.TempPath}\servers\index.json";
 
-                    if (File.Exists(servers))
-                        JServerIDs = JObject.Parse(File.ReadAllText(servers));
-                    if (File.Exists(channel))
-                        JChannelIDs = JObject.Parse(File.ReadAllText(channel));
+                    JServerIDs = File.Exists(servers) ? JObject.Parse(File.ReadAllText(servers)) : null;
+                    JChannelIDs = File.Exists(channel) ? JObject.Parse(File.ReadAllText(channel)) : null;
                 }
+                catch { form.Invoke(Error, "IDsFailed"); return; }
                 form.Invoke(Value, start += max);
                 #endregion
 
-
-                #region Messages
-                max = 30;
+                #region Messages Channel
+                max = 35;
                 form.Invoke(Label, "Messages");
-                if (DeleteMessages)
+                string messages = $@"{Ziper.TempPath}\messages";
+                try
                 {
-                    string messages = $@"{Ziper.TempPath}\messages";
                     if (Directory.Exists(messages))
-                        foreach (string directory in Directory.GetDirectories(messages))
-                            Directory.Delete(directory, true);
-                }
-                else
-                {
-                    if (HideMessages)
                     {
-                        string messages = $@"{Ziper.TempPath}\messages";
-                        static string[] fl(IReadOnlyDictionary<string, string> line, int nb) => new string[] { line.ContainsKey("Timestamp") ? line["Timestamp"] : "Timestamp" };
-                        if (Directory.Exists(messages))
+                        string[] directories = Directory.GetDirectories(messages);
+                        if (DeleteMessages)
                         {
+                            foreach (string directory in Directory.GetDirectories(messages))
+                                Directory.Delete(directory, true);
+
+                        }
+                        else if (HideMessages)
+                        {
+
+                            static string[] fl(IReadOnlyDictionary<string, string> line, int nb) => new string[] { line.ContainsKey("Timestamp") ? line["Timestamp"] : "Timestamp" };
                             List<Task> tasks = new List<Task>();
-                            string[] directories = Directory.GetDirectories(messages);
                             foreach (string directory in directories)
                                 tasks.Add(Rygone.Tool.Editor.CSVEditor.Edit($@"{directory}\messages.csv", fl));
                             int i = 0;
                             foreach (Task task in tasks)
                             {
                                 task.Wait();
-                                form.Invoke(Value, start + ((max * ++i) / tasks.Count));
+                                form.Invoke(Value, start + (((max - 5) * ++i) / tasks.Count));
                             }
+                        }
+                        form.Invoke(Label, "Channel");
+                        string file = $@"{messages}\index.json";
+                        if ((HideChannelIDs || HideChannelNames) && File.Exists(file))
+                        {
+                            JObject res = new JObject();
+                            foreach (string directory in directories)
+                            {
+                                string from = directory.Substring(messages.Length + 1);
+                                string to = GetChannel(from, HideChannelIDs, HideChannelNames);
+                                if (HideChannelIDs)
+                                    Directory.Move(directory, $@"{messages}\{to}");
+                                res[HideChannelIDs ? to : from] = to;
+                            }
+                            File.WriteAllText(file, res.ToString());
                         }
                     }
                 }
+                catch { form.Invoke(Error, "MessagesChannelFailed"); return; }
                 form.Invoke(Value, start += max);
                 #endregion
 
                 #region user.json
                 max = 5;
                 form.Invoke(Label, "user.json");
+                try
                 {
                     string userjs = $@"{Ziper.TempPath}\account\user.json";
                     if (File.Exists(userjs))
@@ -204,35 +229,41 @@ namespace AnonymiserDiscordData.Tool
                         File.WriteAllText(userjs, js.ToString());
                     }
                 }
+                catch { form.Invoke(Error, "user.jsonFailed"); return; }
                 form.Invoke(Value, start += max);
                 #endregion
 
                 #region NickName
-                max = 5;
+                max = 2;
                 form.Invoke(Label, "NickName");
-                if (HideNicknames)
+                try
                 {
-                    string avatar = $@"{Ziper.TempPath}\account\avatar.png";
-                    if (File.Exists(avatar))
-                        File.Delete(avatar);
+                    if (HideNicknames)
+                    {
+                        string avatar = $@"{Ziper.TempPath}\account\avatar.png";
+                        if (File.Exists(avatar))
+                            File.Delete(avatar);
+                    }
                 }
+                catch { form.Invoke(Error, "NickNameFailed"); return; }
                 form.Invoke(Value, start += max);
                 #endregion
 
                 #region Activity
                 max = 50;
                 form.Invoke(Label, "Activity");
+                try
                 {
                     if (DeleteActivities)
                     {
-                        string messages = $@"{Ziper.TempPath}\activity";
-                        if (Directory.Exists(messages))
-                            Directory.Delete(messages, true);
+                        string activity = $@"{Ziper.TempPath}\activity";
+                        if (Directory.Exists(activity))
+                            Directory.Delete(activity, true);
                     }
                     else if (HideIPs || HideOS || HideLocations)
                     {
-                        string messages = $@"{Ziper.TempPath}\activity";
-                        if (Directory.Exists(messages))
+                        string activity = $@"{Ziper.TempPath}\activity";
+                        if (Directory.Exists(activity))
                         {
                             List<Task> tasks = new List<Task>();
 
@@ -275,12 +306,9 @@ namespace AnonymiserDiscordData.Tool
                                 "timestamp",
                             });
                             if (HideMessages || DeleteMessages) list.Remove("message_id");
-                            if (HideChannelIDs)
-                            {
-                                list.Remove("channel");
-                                list.Remove("channel_type");
-                            }
-                            if (HideServerIDs) list.Remove("server");
+                            if (HideChannelNames) list.Remove("channel");
+                            if (HideChannelIDs) list.Remove("channel_type"); 
+                            if (HideServerIDs && HideServerNames) list.Remove("server");
                             if (HideNicknames) list.Remove("user_id");
                             if (HideIPs)
                             {
@@ -310,9 +338,13 @@ namespace AnonymiserDiscordData.Tool
                                 foreach (string key in array)
                                     if (line.ContainsKey(key))
                                         res.Add(key, line[key]);
+                                if (HideChannelIDs && !HideChannelNames && res.ContainsKey("channel"))
+                                    res["channel"] = GetChannel((string)res["channel"], HideChannelIDs, HideChannelNames);
+                                if (HideServerIDs && !HideServerNames && res.ContainsKey("server"))
+                                    res["server"] = GetServer((string)res["server"], HideServerIDs, HideServerNames);
                                 return res;
                             }
-                            foreach (string directory in Directory.EnumerateDirectories(messages))
+                            foreach (string directory in Directory.EnumerateDirectories(activity))
                                 foreach (string file in Directory.EnumerateFiles(directory))
                                     tasks.Add(Rygone.Tool.Editor.JSEditor.Edit(file, fl));
                             int i = 0;
@@ -324,14 +356,146 @@ namespace AnonymiserDiscordData.Tool
                         }
                     }
                 }
+                catch { form.Invoke(Error, "ActivityFailed"); return; }
+                form.Invoke(Value, start += max);
+                #endregion
+
+                #region Servers
+                max = 5;
+                form.Invoke(Label, "Servers");
+                try
+                {
+                    string servers = $@"{Ziper.TempPath}\servers";
+                    List<string> serverIDs = new List<string>();
+                    if (Directory.Exists(servers))
+                    {
+                        string[] directories = Directory.GetDirectories(servers);
+                        foreach (string directory in directories)
+                        {
+                            if (HideNicknames)
+                            {
+                                string audit_log = $@"{directory}\audit-log.json";
+                                if (File.Exists(audit_log))
+                                    File.Delete(audit_log);
+                            }
+                            serverIDs.Add(directory.Substring(servers.Length + 1));
+                        }
+                        string file = $@"{servers}\index.json";
+                        if ((HideServerIDs || HideServerNames) && File.Exists(file))
+                        {
+                            JObject res = new JObject();
+                            foreach (string directory in directories)
+                            {
+                                string from = directory.Substring(servers.Length + 1);
+                                string to = GetServer(from, HideChannelIDs, HideChannelNames);
+
+                                string guild_json = $@"{directory}\guild.json";
+                                if (File.Exists(guild_json))
+                                {
+                                    JObject guild = new JObject();
+                                    guild["id"] = HideServerIDs ? to : from;
+                                    guild["name"] = to;
+                                    File.WriteAllText(guild_json, guild.ToString());
+                                }
+                                if(HideNicknames || HideServerIDs || HideServerNames || HideChannelIDs || HideChannelNames)
+                                {
+                                    string[] todels = new string[]
+                                    {
+                                        "bans",
+                                        "channels",
+                                        "emoji",
+                                        "webhooks",
+                                    };
+                                    foreach (string todel in todels)
+                                        if (File.Exists($@"{directory}\{todel}.json"))
+                                            File.Delete($@"{directory}\{todel}.json");
+                                }
+                                if (HideChannelIDs)
+                                    Directory.Move(directory, $@"{servers}\{to}");
+                                res[HideServerIDs ? to : from] = to;
+                            }
+                            File.WriteAllText(file, res.ToString());
+                        }
+                    }
+                }
+                catch { form.Invoke(Error, "ServersFailed"); return; }
+                form.Invoke(Value, start += max);
+                #endregion
+
+                #region Applications
+                max = 5;
+                form.Invoke(Label, "Applications");
+                try
+                {
+                    string applications = $@"{Ziper.TempPath}\account\applications";
+                    if (Directory.Exists(applications))
+                    {
+                        if (DeleteApplication)
+                            Directory.Delete(applications, true);
+                        else if(HideApplication)
+                        {
+                            string[] directories = Directory.GetDirectories(applications);
+                            string[] keep = new string[]
+                            {
+                                "hook",
+                                "bot_public",
+                                "bot_require_code_grant",
+                                "flags",
+                                "rpc_application_state",
+                                "store_application_state",
+                                "verification_state",
+                            };
+                            int i = 0;
+                            foreach (string directory in directories)
+                            {
+                                string file = $@"{directory}\bot-avatar.png";
+                                if (File.Exists(file))
+                                    File.Delete(file);
+                                file = $@"{directory}\application.json";
+                                string name = "";
+                                if (File.Exists(file))
+                                {
+                                    JObject res = new JObject();
+                                    JObject js = JObject.Parse(File.ReadAllText(file));
+
+                                    res["name"] = name = !HideNicknames && js.ContainsKey("name") ? (string)js["name"] : $"application_{i}";
+                                    res["description"] = !HideNicknames && js.ContainsKey("description") ? js["description"] : "";
+                                    res["summary"] = !HideNicknames && js.ContainsKey("summary") ? js["summary"] : "";
+
+                                    foreach(string key in keep)
+                                        if (js.ContainsKey(key))
+                                            res[key] = js[key];
+                                    File.WriteAllText(file, res.ToString());
+                                }
+                                Directory.Move(directory, $@"{applications}\{name}");
+                            }
+                        }
+                    }
+                }
+                catch { form.Invoke(Error, "ApplicationsFailed"); return; }
                 form.Invoke(Value, start += max);
                 #endregion
 
                 #region Zip
                 max = 5;
                 form.Invoke(Label, "Zip");
-                Ziper.Zip($"{Path[0..^4]}-Anonymiser.zip");
-                Directory.Delete(Ziper.TempPath, true);
+                string tozip;
+                {
+                    tozip = $"{Path[0..^4]}-{Settings.GetText("Anonymize")}.zip";
+                    int i = 1;
+                    do
+                    {
+                        if (Ziper.Zip(tozip))
+                            break;
+                        tozip = $"{Path[0..^4]}-{Settings.GetText("Anonymize")} ({i++}).zip";
+                    } while (i < 10);
+                    if (!(i < 10))
+                    {
+                        form.Invoke(Error, "ZipFailed");
+                        return;
+                    }
+                    Directory.Delete(Ziper.TempPath, true);
+                }
                 form.Invoke(Value, start += max);
                 #endregion
 
@@ -346,7 +510,7 @@ namespace AnonymiserDiscordData.Tool
                 #endregion
                 */
 
-                form.Invoke(End);
+                form.Invoke(End, tozip);
             });
             t.Start();
         }

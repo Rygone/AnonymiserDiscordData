@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30621.155
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnonymiserDiscordData", "AnonymiserDiscordData\AnonymiserDiscordData.csproj", "{B933108D-5486-4D02-B81D-08943E280B96}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rygone", "Rygone\Rygone.csproj", "{DF65E744-C107-44C3-9AB7-1BAB738BEFB5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rygone", "Rygone\Rygone.csproj", "{DF65E744-C107-44C3-9AB7-1BAB738BEFB5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rygone.Test", "Rygone.Test\Rygone.Test.csproj", "{F2666AE9-276E-49F0-9591-3C999596CE9E}"
 EndProject

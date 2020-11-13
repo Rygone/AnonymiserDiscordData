@@ -28,6 +28,10 @@ namespace AnonymiserDiscordData
             settings.Size = S;
             loading.Location = P;
             loading.Size = S;
+            end.Location = P;
+            end.Size = S;
+            err.Location = P;
+            err.Size = S;
             UpdateView();
 
             AddControl(this);
@@ -77,6 +81,13 @@ namespace AnonymiserDiscordData
             };
 
             AddControl(lblLoading);
+
+            AddControl(end1);
+            AddControl(end2);
+            AddControl(end4);
+
+            AddControl(err1);
+            AddControl(err3);
         }
         private void SettingsEventHandler(object sender, EventArgs e)
         {
@@ -102,6 +113,7 @@ namespace AnonymiserDiscordData
             ++Step;
             UpdateView();
         }
+
         private void Info4_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             const string url = "https://github.com/Rygone/AnonymiserDiscordData";
@@ -111,21 +123,42 @@ namespace AnonymiserDiscordData
             }
             catch
             {
-                //"Impossible de lancer navigateur internet,\r\nURL copier dans le presse papier"
                 MessageBox.Show(GetText("UrlError"));
+                Clipboard.SetText(url);
+            }
+        }
+
+        private void End3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            string url = ((Control)sender).Text;
+            try
+            {
+                System.Diagnostics.Process.Start(url);
+            }
+            catch
+            {
+                MessageBox.Show(GetText("FileError"));
                 Clipboard.SetText(url);
             }
         }
         private void Found_Click(object sender, EventArgs e)
         {
-            using OpenFileDialog openFileDialog = new OpenFileDialog
+            next.Enabled = false;
+            found.Enabled = false;
+
+            OpenFileDialog openFileDialog = new OpenFileDialog
             {
                 Filter = "zip files (*.zip)|*.zip",
                 FilterIndex = 1
             };
             if (openFileDialog.ShowDialog() == DialogResult.OK)
                 path.Text = openFileDialog.FileName;
+
+            next.Enabled = true;
+            found.Enabled = true;
         }
+
+        private string value = null;
 
         private void UpdateView()
         {
@@ -139,6 +172,7 @@ namespace AnonymiserDiscordData
                 case 1:
                     {
                         info.Visible = false;
+                        err.Visible = false;
                         settings.Visible = true;
                     }
                     break;
@@ -156,8 +190,8 @@ namespace AnonymiserDiscordData
                                 (value) => { pbLoading.Maximum = value; },
                                 (value) => { pbLoading.Value = value; },
                                 (value) => { lblLoading.Text = GetText(value); },
-                                () => { Step += 1; UpdateView(); },
-                                (error) => { Step += 2; UpdateView(); },
+                                (value) => { Step += 1; this.value = value; UpdateView(); },
+                                (value) => { Step += 3; this.value = value;  UpdateView(); },
                                 HideMessages.Checked,
                                 DeleteMessages.Checked,
                                 HideNicknames.Checked,
@@ -174,20 +208,36 @@ namespace AnonymiserDiscordData
                             );
                         }
                         else
+                        {
                             --Step;
+                            Found_Click(null, null);
+                        }
                     }
                     break;
                 case 3:
                     {
-
+                        next.Enabled = true;
+                        language.Enabled = true;
+                        loading.Visible = false;
+                        end3.Text = value;
+                        end.Visible = true;
                     }
                     break;
                 case 4:
+                    Close();
+                    break;
+                case 5:
                     {
-
+                        next.Enabled = true;
+                        language.Enabled = true;
+                        loading.Visible = false;
+                        err.Visible = true;
+                        err2.Text = GetText(value);
+                        Step = 0;
                     }
                     break;
             }
         }
+
     }
 }
